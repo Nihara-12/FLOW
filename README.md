@@ -4,6 +4,7 @@
 
 > Turning community reports into intelligent action.
 
+> **⏳ Demo Note:** The live application may take approximately **60 seconds to fully load** on the first visit because the backend is hosted on a free-tier service. Please allow the initial loading period before testing the application.
 
 
 \## 🌍 The Problem
