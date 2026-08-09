@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #172033;
+  background: #f7f9fc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid #22c55e;
+  outline-offset: 3px;
+}
+/* =========================================
+   FLOW ACCESSIBILITY
+========================================= */
+
+.text-large {
+  font-size: 110%;
+}
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+.dark body {
+  background-color: #0f1713;
+  color: #f2f7f3;
+}
+
+/* Main backgrounds */
+.dark .bg-\[\#f5f8f6\] {
+  background-color: #0f1713;
+}
+
+.dark .bg-white {
+  background-color: #18231d;
+}
+
+.dark .bg-\[\#fafcfb\] {
+  background-color: #121c16;
+}
+
+/* Main dark text */
+.dark .text-\[\#14201b\] {
+  color: #f2f7f3;
+}
+
+/* Black text utilities */
+.dark .text-black {
+  color: #f2f7f3;
+}
+
+.dark .text-black\/50 {
+  color: rgba(242, 247, 243, 0.58);
+}
+
+.dark .text-black\/45 {
+  color: rgba(242, 247, 243, 0.52);
+}
+
+.dark .text-black\/40 {
+  color: rgba(242, 247, 243, 0.45);
+}
+
+.dark .text-black\/30 {
+  color: rgba(242, 247, 243, 0.35);
+}
+
+/* Borders */
+.dark .border-black\/5 {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .border-black\/10 {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Emerald/light cards */
+.dark .bg-emerald-50 {
+  background-color: rgba(33, 163, 102, 0.15);
+}
+
+.dark .text-\[\#168653\] {
+  color: #55d98b;
+}
+
+.dark .text-\[\#21a366\] {
+  color: #55d98b;
+}
+
+/* Hover states */
+.dark .hover\:bg-black\/5:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Inputs */
+.dark input,
+.dark textarea,
+.dark select {
+  color: #f2f7f3;
+  background-color: #121c16;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: rgba(242, 247, 243, 0.35);
+}
+
+/* Accessibility panel */
+.dark .fixed.bg-white {
+  background-color: #18231d;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark .fixed.bg-white button {
+  color: #f2f7f3;
+}
+
+/* Shadows */
+.dark .shadow-sm,
+.dark .shadow-xl {
+  --tw-shadow-color: rgba(0, 0, 0, 0.35);
+}
