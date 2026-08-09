@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   CheckCircle2,
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 
 function Landing() {
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -99,9 +101,13 @@ function Landing() {
               Sign in
             </button>
 
-            <button className="rounded-full bg-[#123d2a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-950/20 transition hover:-translate-y-0.5 hover:bg-[#0d3020]">
-              Report an issue
-            </button>
+            <button
+  type="button"
+  onClick={() => navigate("/login")}
+  className="rounded-full bg-[#123d2a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-950/20 transition hover:-translate-y-0.5 hover:bg-[#0d3020]"
+>
+  Report an issue
+</button>
           </div>
 
           {/* MOBILE */}
