@@ -1,512 +1,556 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   CheckCircle2,
-  ChevronDown,
-  Eye,
-  Globe2,
-  Menu,
-  Moon,
   MapPin,
-  ShieldCheck,
-  Sparkles,
+  Moon,
   Sun,
-  Users,
-  X,
-  Zap,
+  Sparkles,
 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Landing() {
-  const navigate = useNavigate();
-  const [darkMode, setDarkMode] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("flowDarkMode") === "true"
+  );
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("flowDarkMode", darkMode);
+  }, [darkMode]);
 
   return (
-    <div
-      className={
-        darkMode
-          ? "min-h-screen bg-[#08100d] text-white transition-colors duration-500"
-          : "min-h-screen bg-[#f7faf8] text-[#14201b] transition-colors duration-500"
-      }
-    >
-      {/* NAVBAR */}
-      <header
-        className={
-          darkMode
-            ? "fixed top-0 z-50 w-full border-b border-white/10 bg-[#08100d]/80 backdrop-blur-xl"
-            : "fixed top-0 z-50 w-full border-b border-black/5 bg-white/75 backdrop-blur-xl"
-        }
-      >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+    <div className="min-h-screen bg-[#07100c] text-white">
+
+      {/* ================= NAVBAR ================= */}
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07100c]/90 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
+
           {/* LOGO */}
-          <a href="#" className="flex items-center gap-3" aria-label="FLOW home">
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#123d2a] text-white shadow-lg shadow-emerald-900/20">
-              <span className="text-lg font-black">F</span>
+          <Link
+            to="/"
+            className="flex items-center gap-3"
+          >
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#125c3b] text-lg font-black">
+              F
             </div>
 
             <div>
-              <div className="text-lg font-black tracking-tight">FLOW</div>
-              <div
-                className={
-                  darkMode
-                    ? "text-[9px] font-medium uppercase tracking-[0.25em] text-white/45"
-                    : "text-[9px] font-medium uppercase tracking-[0.25em] text-black/40"
-                }
-              >
+              <div className="text-lg font-black tracking-tight">
+                FLOW
+              </div>
+
+              <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/35">
                 Civic Intelligence
               </div>
             </div>
-          </a>
+          </Link>
 
-          {/* DESKTOP NAV */}
-          <div className="hidden items-center gap-8 md:flex">
+          {/* NAVIGATION */}
+          <nav className="hidden items-center gap-8 md:flex">
+
             <a
-              href="#how"
-              className="text-sm font-medium opacity-70 transition hover:opacity-100"
+              href="#how-it-works"
+              className="text-sm font-medium text-white/65 transition hover:text-white"
             >
               How it works
             </a>
 
             <a
               href="#impact"
-              className="text-sm font-medium opacity-70 transition hover:opacity-100"
+              className="text-sm font-medium text-white/65 transition hover:text-white"
             >
               Impact
             </a>
 
             <a
               href="#accessibility"
-              className="text-sm font-medium opacity-70 transition hover:opacity-100"
+              className="text-sm font-medium text-white/65 transition hover:text-white"
             >
               Accessibility
             </a>
-          </div>
+
+          </nav>
 
           {/* ACTIONS */}
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="flex items-center gap-2 sm:gap-3">
+
+            {/* DARK MODE */}
             <button
+              type="button"
               onClick={() => setDarkMode(!darkMode)}
-              className={
-                darkMode
-                  ? "flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 transition hover:bg-white/10"
-                  : "flex h-10 w-10 items-center justify-center rounded-full border border-black/5 bg-white transition hover:bg-black/5"
-              }
-              aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              aria-label="Toggle dark mode"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 text-white/75 transition hover:bg-white/10"
             >
-              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+              {darkMode ? (
+                <Sun size={18} />
+              ) : (
+                <Moon size={18} />
+              )}
             </button>
 
-            <button className="rounded-full border border-black/10 px-5 py-2.5 text-sm font-semibold transition hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/5">
+            {/* SIGN IN */}
+            <Link
+              to="/login"
+              className="rounded-full border border-white/10 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10"
+            >
               Sign in
-            </button>
+            </Link>
 
-            <button
-  type="button"
-  onClick={() => navigate("/login")}
-  className="rounded-full bg-[#123d2a] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-950/20 transition hover:-translate-y-0.5 hover:bg-[#0d3020]"
->
-  Report an issue
-</button>
+            {/* REPORT */}
+            <Link
+              to="/login"
+              className="hidden rounded-full bg-[#125c3b] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-emerald-950/30 transition hover:-translate-y-0.5 hover:bg-[#0e7549] sm:block"
+            >
+              Report an issue
+            </Link>
+
           </div>
-
-          {/* MOBILE */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-full md:hidden"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-          >
-            {menuOpen ? <X /> : <Menu />}
-          </button>
-        </nav>
-
-        {menuOpen && (
-          <div
-            className={
-              darkMode
-                ? "border-t border-white/10 bg-[#08100d] p-5 md:hidden"
-                : "border-t border-black/5 bg-white p-5 md:hidden"
-            }
-          >
-            <div className="flex flex-col gap-5">
-              <a href="#how" onClick={() => setMenuOpen(false)}>
-                How it works
-              </a>
-              <a href="#impact" onClick={() => setMenuOpen(false)}>
-                Impact
-              </a>
-              <a href="#accessibility" onClick={() => setMenuOpen(false)}>
-                Accessibility
-              </a>
-
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className="flex items-center gap-2 text-left"
-              >
-                {darkMode ? <Sun size={18} /> : <Moon size={18} />}
-                {darkMode ? "Light mode" : "Dark mode"}
-              </button>
-            </div>
-          </div>
-        )}
+        </div>
       </header>
 
-      {/* HERO */}
+      {/* ================= HERO ================= */}
       <main>
-        <section className="relative overflow-hidden pt-32 lg:pt-40">
-          {/* decorative background */}
-          <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-emerald-300/20 blur-3xl" />
-          <div className="pointer-events-none absolute -right-40 top-40 h-96 w-96 rounded-full bg-cyan-300/20 blur-3xl" />
 
-          <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 pb-20 lg:grid-cols-[1fr_1.05fr] lg:px-8 lg:pb-28">
-            {/* COPY */}
+        <section className="relative overflow-hidden">
+
+          {/* BACKGROUND GLOW */}
+          <div className="pointer-events-none absolute left-[-15%] top-20 h-[500px] w-[500px] rounded-full bg-emerald-600/15 blur-[140px]" />
+
+          <div className="pointer-events-none absolute right-[-10%] top-10 h-[450px] w-[450px] rounded-full bg-teal-500/10 blur-[140px]" />
+
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[0.95fr_1.05fr] lg:px-8 lg:py-24">
+
+            {/* HERO TEXT */}
             <div>
-              <div
-                className={
-                  darkMode
-                    ? "mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-xs font-semibold text-emerald-300"
-                    : "mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold text-emerald-800"
-                }
-              >
+
+              {/* BADGE */}
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-4 py-2 text-xs font-bold text-emerald-300">
                 <Sparkles size={14} />
                 AI-powered civic intelligence
               </div>
 
-              <h1 className="max-w-3xl text-5xl font-black leading-[0.95] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
+              {/* HEADING */}
+              <h1 className="mt-7 max-w-2xl text-5xl font-black leading-[0.98] tracking-[-0.04em] sm:text-6xl lg:text-[72px]">
+
                 See what's
-                <span className="block text-[#21a366]">breaking.</span>
-                Fix what matters
-                <span className="block">first.</span>
+                <span className="block text-[#21c878]">
+                  breaking.
+                </span>
+
+                <span className="block">
+                  Fix what matters
+                </span>
+
+                <span className="block">
+                  first.
+                </span>
+
               </h1>
 
-              <p
-                className={
-                  darkMode
-                    ? "mt-7 max-w-xl text-lg leading-8 text-white/60"
-                    : "mt-7 max-w-xl text-lg leading-8 text-black/60"
-                }
-              >
+              {/* DESCRIPTION */}
+              <p className="mt-7 max-w-xl text-base leading-8 text-white/55 sm:text-lg">
                 FLOW turns scattered community reports into actionable
                 intelligence — helping people report problems and helping
                 authorities fix the issues that matter most.
               </p>
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <button className="group flex items-center justify-center gap-2 rounded-full bg-[#123d2a] px-7 py-4 font-bold text-white shadow-xl shadow-emerald-950/20 transition hover:-translate-y-1 hover:bg-[#0d3020]">
-                  Report a problem
-                  <ArrowRight
-                    size={18}
-                    className="transition group-hover:translate-x-1"
-                  />
-                </button>
+              {/* BUTTONS */}
+              <div className="mt-9 flex flex-wrap gap-3">
 
-                <button
-                  className={
-                    darkMode
-                      ? "flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-7 py-4 font-semibold transition hover:bg-white/10"
-                      : "flex items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-7 py-4 font-semibold shadow-sm transition hover:bg-black/5"
-                  }
+                {/* REPORT PROBLEM */}
+                <Link
+                  to="/login"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#125c3b] px-7 py-4 text-sm font-bold text-white shadow-xl shadow-emerald-950/30 transition hover:-translate-y-1 hover:bg-[#0e7549]"
+                >
+                  Report a problem
+                  <ArrowRight size={17} />
+                </Link>
+
+                {/* EXPLORE */}
+                <a
+                  href="#impact"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.03] px-7 py-4 text-sm font-bold text-white transition hover:bg-white/[0.08]"
                 >
                   Explore the city
-                  <MapPin size={18} />
-                </button>
+                  <MapPin size={17} />
+                </a>
+
               </div>
 
-              {/* TRUST */}
-              <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm opacity-60">
-                <span className="flex items-center gap-2">
-                  <ShieldCheck size={16} />
-                  Privacy conscious
-                </span>
-
-                <span className="flex items-center gap-2">
-                  <Eye size={16} />
-                  Accessible by design
-                </span>
-
-                <span className="flex items-center gap-2">
-                  <Globe2 size={16} />
-                  Community powered
-                </span>
-              </div>
             </div>
 
-            {/* VISUAL */}
+            {/* ================= HERO VISUAL ================= */}
             <div className="relative">
-              <div className="relative overflow-hidden rounded-[2rem] border border-black/10 bg-[#dfe9e3] shadow-2xl shadow-black/10 dark:border-white/10 dark:bg-[#12221b]">
+
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#102019] shadow-2xl shadow-black/40">
+
                 {/* CITY IMAGE */}
                 <img
-                  src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1400&q=85"
-                  alt="Urban city skyline representing the community FLOW serves"
-                  className="h-[430px] w-full object-cover opacity-75 mix-blend-multiply dark:opacity-50 dark:mix-blend-normal"
+                  src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=85"
+                  alt="City skyline representing FLOW civic intelligence"
+                  className="h-[420px] w-full object-cover opacity-70 sm:h-[500px]"
                 />
 
-                {/* MAP OVERLAY */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#06120c]/95 via-transparent to-transparent" />
+                {/* IMAGE OVERLAY */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#07100c] via-transparent to-transparent" />
 
-                {/* ISSUE MARKERS */}
-                <div className="absolute left-[22%] top-[32%]">
-                  <div className="relative">
-                    <span className="absolute -inset-3 animate-ping rounded-full bg-red-400/30" />
-                    <span className="relative flex h-4 w-4 rounded-full border-2 border-white bg-red-500 shadow-lg" />
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-emerald-950/20" />
 
-                <div className="absolute left-[63%] top-[43%]">
-                  <span className="flex h-4 w-4 rounded-full border-2 border-white bg-orange-400 shadow-lg" />
-                </div>
+                {/* MAP MARKER 1 */}
+                <MapMarker
+                  top="32%"
+                  left="28%"
+                  color="red"
+                />
 
-                <div className="absolute left-[74%] top-[68%]">
-                  <span className="flex h-4 w-4 rounded-full border-2 border-white bg-yellow-400 shadow-lg" />
-                </div>
+                {/* MAP MARKER 2 */}
+                <MapMarker
+                  top="43%"
+                  left="67%"
+                  color="orange"
+                />
 
-                <div className="absolute left-[40%] top-[70%]">
-                  <div className="relative">
-                    <span className="absolute -inset-3 animate-ping rounded-full bg-red-400/20" />
-                    <span className="relative flex h-4 w-4 rounded-full border-2 border-white bg-red-500 shadow-lg" />
-                  </div>
-                </div>
+                {/* MAP MARKER 3 */}
+                <MapMarker
+                  top="68%"
+                  left="47%"
+                  color="red"
+                />
 
-                {/* FLOATING CARD */}
-                <div className="absolute bottom-5 left-5 right-5 rounded-3xl border border-white/15 bg-[#08120d]/85 p-5 text-white shadow-2xl backdrop-blur-xl sm:left-auto sm:w-[310px]">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <div className="text-xs font-medium uppercase tracking-wider text-white/50">
-                        Emerging issue
-                      </div>
+                {/* ISSUE CARD */}
+                <div className="absolute bottom-8 right-6 w-[280px] rounded-[1.5rem] border border-white/10 bg-[#0d1712]/90 p-5 shadow-2xl backdrop-blur-xl sm:right-8 sm:w-[320px]">
 
-                      <div className="mt-1 text-lg font-bold">
-                        Drainage blockage
-                      </div>
-                    </div>
+                  <div className="flex items-center justify-between">
 
-                    <div className="rounded-full bg-red-500/15 px-2.5 py-1 text-xs font-bold text-red-300">
+                    <span className="text-xs font-bold uppercase tracking-wider text-white/45">
+                      Emerging issue
+                    </span>
+
+                    <span className="rounded-full bg-red-400/15 px-3 py-1 text-[10px] font-black text-red-300">
                       HIGH
-                    </div>
+                    </span>
+
                   </div>
 
-                  <div className="mt-4 flex items-center justify-between text-sm text-white/60">
-                    <span>24 reports</span>
-                    <span className="text-emerald-300">↑ 180%</span>
+                  <h3 className="mt-3 text-xl font-black">
+                    Drainage blockage
+                  </h3>
+
+                  <div className="mt-4 flex items-center justify-between">
+
+                    <span className="text-sm text-white/45">
+                      24 reports
+                    </span>
+
+                    <span className="text-sm font-black text-[#21c878]">
+                      ↑ 180%
+                    </span>
+
                   </div>
 
-                  <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-white/10">
-                    <div className="h-full w-[88%] rounded-full bg-emerald-400" />
+                  <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
+                    <div className="h-full w-[88%] rounded-full bg-[#21c878]" />
                   </div>
 
-                  <div className="mt-3 text-xs text-white/45">
+                  <div className="mt-3 text-xs text-white/30">
                     AI priority score: 88/100
                   </div>
+
                 </div>
+
               </div>
 
-              {/* SMALL FLOATING STAT */}
-              <div
-                className={
-                  darkMode
-                    ? "absolute -bottom-5 -left-4 rounded-2xl border border-white/10 bg-[#13231b]/95 p-4 shadow-xl backdrop-blur-xl sm:-left-7"
-                    : "absolute -bottom-5 -left-4 rounded-2xl border border-black/5 bg-white/95 p-4 shadow-xl backdrop-blur-xl sm:-left-7"
-                }
-              >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
-                    <CheckCircle2 size={21} />
+              {/* RESOLVED CARD */}
+              <div className="absolute -bottom-5 left-5 flex items-center gap-3 rounded-2xl border border-white/10 bg-[#122019]/95 p-4 shadow-xl backdrop-blur-xl sm:left-[-20px]">
+
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-300/15 text-emerald-300">
+                  <CheckCircle2 size={22} />
+                </div>
+
+                <div>
+                  <div className="text-xl font-black">
+                    1,055
                   </div>
 
-                  <div>
-                    <div className="text-lg font-black">1,055</div>
-                    <div className="text-xs opacity-50">issues resolved</div>
+                  <div className="text-xs text-white/40">
+                    issues resolved
                   </div>
                 </div>
+
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* STATS */}
-        <section
-          id="impact"
-          className={
-            darkMode
-              ? "border-y border-white/10 bg-white/[0.02]"
-              : "border-y border-black/5 bg-white"
-          }
-        >
-          <div className="mx-auto grid max-w-7xl grid-cols-2 px-5 py-12 md:grid-cols-4 lg:px-8">
-            <Stat number="1,284" label="Issues reported" icon={<MapPin />} />
-            <Stat number="1,055" label="Issues resolved" icon={<CheckCircle2 />} />
-            <Stat number="326" label="Currently active" icon={<Zap />} />
-            <Stat number="4.8k" label="Community members" icon={<Users />} />
-          </div>
-        </section>
-
-        {/* HOW IT WORKS */}
-        <section id="how" className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
-          <div className="max-w-2xl">
-            <div className="text-sm font-bold uppercase tracking-[0.2em] text-[#21a366]">
-              How FLOW works
             </div>
 
-            <h2 className="mt-4 text-4xl font-black tracking-tight sm:text-5xl">
-              From scattered reports to action.
-            </h2>
-
-            <p className="mt-5 text-lg leading-8 opacity-60">
-              FLOW uses AI to understand what people are reporting, connect
-              duplicate incidents, identify emerging problems, and help
-              authorities prioritize their response.
-            </p>
-          </div>
-
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
-            <FeatureCard
-              number="01"
-              icon={<MapPin />}
-              title="People report"
-              description="Citizens can report a problem using text, images, location, or voice — in a way that works for them."
-            />
-
-            <FeatureCard
-              number="02"
-              icon={<Sparkles />}
-              title="FLOW understands"
-              description="AI identifies the issue, extracts useful evidence, detects similar reports, and builds a clearer picture."
-            />
-
-            <FeatureCard
-              number="03"
-              icon={<Zap />}
-              title="Authorities act"
-              description="Administrators get a prioritized command center to investigate, assign, track, and resolve incidents."
-            />
           </div>
         </section>
 
-        {/* ACCESSIBILITY */}
+        {/* ================= HOW IT WORKS ================= */}
         <section
-          id="accessibility"
-          className={
-            darkMode
-              ? "border-y border-white/10 bg-[#0d1b15]"
-              : "border-y border-black/5 bg-[#edf7f0]"
-          }
+          id="how-it-works"
+          className="border-t border-white/5 bg-[#09130e]"
         >
-          <div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-20 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+
             <div className="max-w-2xl">
-              <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-[#21a366]">
-                <Eye size={17} />
-                Accessibility first
-              </div>
 
-              <h2 className="mt-4 text-3xl font-black sm:text-4xl">
-                Civic technology should work for everyone.
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-[#21c878]">
+                How it works
+              </p>
+
+              <h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
+                From complaint to action.
               </h2>
 
-              <p className="mt-4 leading-7 opacity-60">
-                FLOW is designed with keyboard navigation, screen-reader
-                support, high contrast, reduced motion, readable typography,
-                voice reporting, and multilingual experiences in mind.
+              <p className="mt-4 text-white/45">
+                FLOW transforms an unstructured citizen complaint into
+                prioritized civic intelligence.
               </p>
+
             </div>
 
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-              {[
-                "Keyboard",
-                "Screen reader",
-                "Voice",
-                "High contrast",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className={
-                    darkMode
-                      ? "rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-center text-sm font-semibold"
-                      : "rounded-2xl border border-black/5 bg-white px-5 py-4 text-center text-sm font-semibold shadow-sm"
-                  }
-                >
-                  {item}
+            <div className="mt-12 grid gap-4 md:grid-cols-4">
+
+              <Step
+                number="01"
+                title="Report"
+                text="Citizens describe a real-world problem."
+              />
+
+              <Step
+                number="02"
+                title="Understand"
+                text="AI identifies the category, severity and risks."
+              />
+
+              <Step
+                number="03"
+                title="Prioritize"
+                text="Administrators see the issues that need attention first."
+              />
+
+              <Step
+                number="04"
+                title="Resolve"
+                text="Issues move through review, action and resolution."
+              />
+
+            </div>
+
+          </div>
+        </section>
+
+        {/* ================= IMPACT ================= */}
+        <section
+          id="impact"
+          className="border-t border-white/5 bg-[#07100c]"
+        >
+          <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+
+            <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+
+              <div>
+
+                <p className="text-xs font-black uppercase tracking-[0.2em] text-[#21c878]">
+                  Community impact
+                </p>
+
+                <h2 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
+                  Every report can become a signal.
+                </h2>
+
+                <p className="mt-5 max-w-xl leading-8 text-white/45">
+                  Instead of letting individual complaints disappear into
+                  disconnected systems, FLOW connects people, problems,
+                  intelligence and action.
+                </p>
+
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+
+                <ImpactCard
+                  value="1,055"
+                  label="Issues resolved"
+                />
+
+                <ImpactCard
+                  value="88/100"
+                  label="AI priority score"
+                />
+
+                <ImpactCard
+                  value="24"
+                  label="Community reports"
+                />
+
+                <ImpactCard
+                  value="180%"
+                  label="Trend detected"
+                />
+
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
+        {/* ================= ACCESSIBILITY ================= */}
+        <section
+          id="accessibility"
+          className="border-t border-white/5 bg-[#09130e]"
+        >
+          <div className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+
+            <div className="rounded-[2rem] border border-white/10 bg-[#102019] p-8 sm:p-10">
+
+              <div className="flex flex-col justify-between gap-8 md:flex-row md:items-center">
+
+                <div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-300/10 text-emerald-300">
+                      <Sparkles size={20} />
+                    </div>
+
+                    <span className="font-black">
+                      Built for everyone
+                    </span>
+                  </div>
+
+                  <h2 className="mt-5 text-3xl font-black">
+                    Accessibility isn't an afterthought.
+                  </h2>
+
+                  <p className="mt-3 max-w-xl leading-7 text-white/45">
+                    FLOW provides accessible controls including dark mode,
+                    large text and a responsive interface designed for
+                    different users and devices.
+                  </p>
+
                 </div>
-              ))}
+
+                <Link
+                  to="/login"
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#125c3b] px-6 py-3.5 text-sm font-bold text-white transition hover:bg-[#0e7549]"
+                >
+                  Get started
+                  <ArrowRight size={17} />
+                </Link>
+
+              </div>
+
             </div>
+
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="px-5 py-24 lg:px-8">
-          <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] bg-[#123d2a] px-6 py-16 text-center text-white shadow-2xl shadow-emerald-950/20 sm:px-12">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10">
-              <Sparkles />
-            </div>
-
-            <h2 className="mt-7 text-4xl font-black tracking-tight sm:text-5xl">
-              Your city speaks.
-              <br />
-              <span className="text-emerald-300">FLOW listens.</span>
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-xl leading-7 text-white/60">
-              One report can start a change. Thousands of reports can reveal
-              what a community needs next.
-            </p>
-
-            <button className="mt-8 rounded-full bg-white px-7 py-3.5 font-bold text-[#123d2a] transition hover:-translate-y-1">
-              Report an issue
-            </button>
-          </div>
-        </section>
       </main>
 
-      {/* FOOTER */}
-      <footer
-        className={
-          darkMode
-            ? "border-t border-white/10 px-5 py-8 text-white/40"
-            : "border-t border-black/5 px-5 py-8 text-black/40"
-        }
-      >
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-3 text-sm sm:flex-row lg:px-8">
-          <div>© 2026 FLOW Civic Intelligence</div>
-          <div>Built for communities. Designed for everyone.</div>
+      {/* ================= FOOTER ================= */}
+      <footer className="border-t border-white/5 bg-[#050b08]">
+
+        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-5 py-8 text-xs text-white/35 sm:flex-row sm:items-center lg:px-8">
+
+          <div className="font-bold text-white/55">
+            FLOW • Civic Intelligence
+          </div>
+
+          <div>
+            Built for HackDevengers 1.0
+          </div>
+
         </div>
+
       </footer>
+
     </div>
   );
 }
 
-function Stat({ number, label, icon }) {
+/* ================================
+   MAP MARKER
+================================ */
+
+function MapMarker({
+  top,
+  left,
+  color,
+}) {
+  const colors = {
+    red: "bg-red-500",
+    orange: "bg-orange-400",
+    yellow: "bg-yellow-400",
+  };
+
   return (
-    <div className="border-r border-black/5 px-5 py-4 first:pl-0 last:border-0 dark:border-white/10">
-      <div className="mb-3 text-[#21a366]">{icon}</div>
-      <div className="text-3xl font-black tracking-tight">{number}</div>
-      <div className="mt-1 text-sm opacity-50">{label}</div>
-    </div>
-  );
-}
+    <div
+      className="absolute"
+      style={{ top, left }}
+    >
+      <div className="relative">
 
-function FeatureCard({ number, icon, title, description }) {
-  return (
-    <div className="group rounded-[1.75rem] border border-black/5 bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-white/10 dark:bg-white/[0.03]">
-      <div className="flex items-center justify-between">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-[#21a366] dark:bg-emerald-400/10">
-          {icon}
-        </div>
-
-        <span className="text-sm font-black text-black/20 dark:text-white/20">
-          {number}
-        </span>
-      </div>
-
-      <h3 className="mt-8 text-xl font-bold">{title}</h3>
-
-      <p className="mt-3 leading-7 opacity-55">{description}</p>
-
-      <div className="mt-6 flex items-center gap-2 text-sm font-bold text-[#21a366]">
-        Learn more
-        <ArrowRight
-          size={16}
-          className="transition group-hover:translate-x-1"
+        <div
+          className={`absolute -inset-3 animate-ping rounded-full opacity-30 ${colors[color]}`}
         />
+
+        <div
+          className={`relative h-5 w-5 rounded-full border-2 border-white shadow-xl ${colors[color]}`}
+        />
+
       </div>
+    </div>
+  );
+}
+
+/* ================================
+   STEP CARD
+================================ */
+
+function Step({
+  number,
+  title,
+  text,
+}) {
+  return (
+    <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.025] p-6">
+
+      <div className="text-sm font-black text-[#21c878]">
+        {number}
+      </div>
+
+      <h3 className="mt-6 text-xl font-black">
+        {title}
+      </h3>
+
+      <p className="mt-2 text-sm leading-6 text-white/40">
+        {text}
+      </p>
+
+    </div>
+  );
+}
+
+/* ================================
+   IMPACT CARD
+================================ */
+
+function ImpactCard({
+  value,
+  label,
+}) {
+  return (
+    <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.025] p-6">
+
+      <div className="text-3xl font-black text-[#21c878]">
+        {value}
+      </div>
+
+      <div className="mt-2 text-sm text-white/40">
+        {label}
+      </div>
+
     </div>
   );
 }
